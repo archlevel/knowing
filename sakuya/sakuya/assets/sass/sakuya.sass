@@ -1,0 +1,676 @@
+@import "compass/css3/border-radius"
+@import "compass/css3/box-shadow"
+@import "compass/css3/images"
+
+$box_inner_border: 1px solid #E1E1E8
+
+body
+  background: #efefef url("/assets/img/pattern.png")
+  padding-top: 57px
+
+@each $cname in span12, container
+  .#{$cname}
+    width: 1270px
+
+span.knowing-heading
+  font-weight: bold
+  color: white
+
+#nav-search
+  input
+    height: 15px
+    margin: 8px 20px 0 0
+    font-size: 13px
+
+#footer
+  width: 100%
+  margin: 0 auto
+  position: fixed
+  bottom: 0px
+  height: 40px
+  border-top: 1px solid #E5E5E5
+  background: whiteSmoke
+
+  #footer-content
+    width: 1270px
+    margin: 0 auto
+    position: relative
+
+    span#copyright
+      display: block
+      margin-top: 12px
+      float: left
+
+    #alarm
+      float: right
+
+      .small
+        margin-top: 10px
+
+      .big
+        margin-top: 8px
+
+      span
+        &#events-critical-label, &#events-warning-label
+          padding: 6px 4px 2px
+
+        &#events-ok-label, &#events-checking-label
+          padding: 2px 4px
+
+      .alert-numbers
+        font-size: 24px
+
+
+.navbar-critical .navbar-inner
+  border-color: hsl(360, 100%, 40%)
+  @include background(linear-gradient(top, hsl(350, 100%, 45%) hsl(360, 100%, 35%)))
+
+.navbar-warning .navbar-inner
+  border-color: hsl(35, 100%, 40%)
+  @include background(linear-gradient(top, hsl(35, 100%, 45%) hsl(35, 100%, 35%)))
+
+.navbar-critical .brand, .navbar-warning .brand
+  color: white
+
+.navbar-critical, .navbar-warning
+  .nav
+    li
+      a
+        color: white
+
+#account-info
+  float: right
+
+#top-img-container
+  margin: 0 auto 10px
+  #top-img
+    min-height: 180px
+
+#top-follow
+  min-height: 30px
+
+#last-events
+  min-height: 30px
+
+.hidden
+  display: none
+
+.right
+  float: right
+
+.clear
+  clear: both
+
+.awesome-box
+  padding: 2px 2px 10px 2px
+  background-color: white
+  border: 1px solid #E1E1E8
+  +border-radius(4px)
+  +box-shadow(0 1px 4px rgba(0, 0, 0, 0.067))
+
+.content-box
+  margin-bottom: 15px
+
+  h3.home-title
+    margin: 4px 0
+    padding: 0 10px 4px
+    // background: #F9F9F9
+    font-size: 14px
+    line-height: 25px
+    border-bottom: 1px solid #E1E1E8
+
+  ul
+    li.categories
+      padding: 10px 20px
+      border-bottom: $box_inner_border
+
+      &:last-child
+        border-bottom: none
+
+      // &:first-child
+      //   margin-top: 10px
+
+.content-box.error
+  padding: 10px 20px 10px 20px
+  p
+    font-size: 20px
+    line-height: 30px
+
+div#icon_list
+  margin-bottom: 50px
+  padding: 10px
+
+  ul
+    margin: 0
+    padding: 0
+
+    li
+      margin-right: 15px
+      float: left
+      display: block
+      width: 70px
+      text-align: center
+      font-size: 12px
+
+      img
+        width: 70px
+        height: 70px
+
+#monitor-container
+  padding: 10px 20px 20px 20px
+  margin-bottom: 50px
+
+  div#acc_categories
+    width: 200px
+    float: left
+    margin-right: 20px
+    padding: 0
+
+    ul
+      li
+        padding: 0
+        font-size: 14px
+        line-height: 20px
+        margin: 5px 0 5px 0
+
+  div.chartlist
+
+    h3
+      font-size: 20px
+      line-height: 32px
+      margin: 0 0 5px 0
+
+    hr
+      margin: 5px 0 5px 0
+
+  ul#monitor_charts
+    padding: 0
+    margin: 0
+
+    li
+      float: left
+      border: 1px solid silver
+      margin: 1px
+      padding-top: 5px
+      background: url("/assets/img/loading_small.gif") center center no-repeat
+
+      div.title
+        text-align: center
+        font-size: 12px
+        font-weight: bold
+
+      img
+        width: 300px
+        height: 180px
+        display: block
+
+  div.main-chart
+    height: 380px
+
+  table#storm_filters
+    border-collapse: collapse
+    border: 0
+    td
+      border: 0
+      padding: 0 20px 0 0
+    th
+      text-align: right
+      font-weight: normal
+      border: 0
+      padding: 0
+
+  table#alert_info
+    border-collapse: collapse
+    border: 0
+    th
+      padding: 0
+      border: 0
+      text-align: right
+      font-weight: normal
+    td
+      padding: 0
+      border: 0
+
+  #tbl_chart_settings
+    th
+      text-align: right
+      padding-top: 12px
+    td
+      input
+        margin: 0
+
+  #chart-option-container
+    min-height: 500px
+
+  #chart-title
+    label
+      margin-right: 20px
+
+  #monitor-tab
+    margin-bottom: 10px
+
+  .nav-pills
+    margin-bottom: 10px
+
+  a.warning-tips
+    color: grey
+    font-size: 14px
+    margin: 5px 15px 0 0
+    line-height: 20px
+
+#chart-container, #chart-option-container, #chart-info-container
+  // border: $box_inner_border
+
+  h3
+    border-bottom: none
+
+#chart-container
+  min-height: 180px
+
+form#chart-date
+  margin-left: 10px
+
+  #date
+    width: 80px
+
+  input, button
+    vertical-align: top
+
+@each $cname in chart-num, chart-followers
+  span.#{$cname}
+    margin-left: 10px
+    font-size: 11px
+    float: left
+
+#admin-container
+  padding: 10px 20px 0 20px
+  margin-bottom: 50px
+
+  #h3_chart_edit_title
+    margin: 0
+    padding: 0
+    line-height: 25px
+
+#ul_warning_rules
+  padding: 0
+  margin: 0
+
+  li.rule
+    padding-bottom: 10px
+
+  li
+    .oprule
+      width: 70px
+
+#ul_storm_filters
+  padding: 0
+  margin: 0
+
+  li.filter
+    padding-bottom: 10px
+
+  li
+    .opfilter
+      width: 70px
+
+#custom_container
+  padding: 10px 20px
+
+  label.no-padding
+    padding: 0
+
+#info-container
+  padding: 10px 20px
+
+.table-content-value
+  margin-bottom: 0px
+  line-height: 20px
+  height: 20px
+  display: inline-block
+  vertical-align: middle
+  padding: 5px
+
+#haopan-container
+  padding: 10px 20px 20px 20px
+
+  div#acc_categories
+    width: 200px
+    float: left
+    margin-right: 20px
+    padding: 0
+
+    ul
+      li
+        padding: 0
+        font-size: 14px
+        line-height: 20px
+        margin: 5px 0 5px 0
+
+  div.haopan-panel
+
+    h3
+      font-size: 20px
+      line-height: 32px
+      margin: 0 0 5px 0
+
+    th
+      text-align: right
+      vertical-align: top
+      line-height: 25px
+
+    ul.nav-pills.custom
+      li
+        height: 25px
+      margin: 0
+      a
+        margin: 3px 3px 0 3px
+        padding: 3px 5px 3px 5px
+
+      //li.active
+      //  a
+      //    background: none
+      //    color: #08c
+      //    font-weight: bold
+
+    hr
+      margin: 10px 0 10px 0
+
+    ul#haopan_charts
+      padding: 0
+      margin: 0
+
+      li
+        float: left
+        border: 1px solid silver
+        margin: 1px
+        padding-top: 5px
+        background: url("/assets/img/loading_small.gif") center center no-repeat
+
+        div.title
+          text-align: center
+          font-size: 12px
+          font-weight: bold
+
+        img
+          width: 300px
+          height: 180px
+          display: block
+
+    .well
+      padding: 5px
+
+  #monitor-tab
+    margin-bottom: 10px
+
+  .nav-pills
+    margin-bottom: 10px
+
+a.knowing
+  color: #333
+
+#ui-datepicker-div
+  font-size: 12px
+  line-height: 12px
+
+.index-container
+
+  #latest-warnings
+
+    ul
+      padding: 0
+      margin: 0
+      li
+        padding: 0 10px 0 10px
+        line-height: 25px
+      li:hover
+        background-color: #efefef
+
+    a.title
+      display: block
+      width: 300px
+      line-height: 25px
+      height: 25px
+      overflow: hidden
+
+    span.leading
+      display: block
+      width: 10px
+      height: 10px
+      margin: 8px 10px 0 0
+      -webkit-border-radius: 2px
+      -moz-border-radius: 2px
+      border-radius: 2px
+
+    span.time
+      line-height: 25px
+
+  div.more
+    line-height: 30px
+    margin-right: 10px
+
+  .monitor-list
+    padding: 0
+    margin: 0
+
+    li
+      line-height: 25px
+      padding: 0 10px 0 10px
+
+      i
+        margin: 6px 7px 0 0
+
+      a
+        display: block
+        height: 25px
+        width: 290px
+        overflow: hidden
+
+      span
+        margin-top: 4px
+
+    li:hover
+      background-color: #efefef
+
+  .front-stats
+    padding: 0 0 0 10px
+    font-size: 16px
+    font-weight: bold
+    margin-bottom: 20px
+    text-shadow: 2px 2px 0 white
+
+    span
+      font-size: 30px
+      font-weight: bold
+      color: #0088CC
+      line-height: 30px
+
+  #personal-stuff
+    height: 300px
+
+    ul.nav-tabs
+      margin: 3px 0 6px 0
+      padding-left: 3px
+      a
+        padding: 4px 10px 4px 10px
+
+    ul.chart-list
+      padding: 0
+      margin: 0
+
+      li
+        line-height: 30px
+        padding: 0 10px 0 10px
+        border-bottom: 1px solid #efefef
+
+        i
+          margin: 8px 8px 0 0
+
+        a
+          display: block
+          height: 30px
+          width: 350px
+          overflow: hidden
+
+        span
+          margin-top: 4px
+
+      li:hover
+        background-color: #efefef
+
+    div.tip
+      padding: 15px
+
+#monitoring-container
+  position: absolute
+  right: 0
+
+  ul#ul_charts
+    padding: 0
+    margin: 0
+
+    li
+      float: left
+      border: 1px solid silver
+      margin: 1px
+      padding-top: 5px
+      background: url("/assets/img/loading_small.gif") center center no-repeat
+
+      div.title
+        text-align: center
+        font-size: 12px
+        font-weight: bold
+
+      img
+        width: 300px
+        height: 180px
+        display: block
+
+    li.critical
+      border: 1px solid red
+      div.title
+        color: red
+
+#search-container
+  padding: 10px 20px 20px 20px
+  margin-bottom: 50px
+
+  hr
+    margin: 5px 0 5px 0
+
+  .form-not-searching
+    text-align: center
+    height: 130px
+    padding-top: 100px
+    background-image: url('/assets/img/search.png')
+    background-repeat: no-repeat
+    background-position: 270px center
+
+  .form-searching
+    margin-bottom: 5px
+
+  ul#chart_list
+    padding: 0
+    margin: 0
+
+    li
+      float: left
+      border: 1px solid silver
+      margin: 1px
+      padding-top: 5px
+      background: url("/assets/img/loading_small.gif") center center no-repeat
+
+      div.title
+        text-align: center
+        font-size: 12px
+        font-weight: bold
+
+      img
+        width: 300px
+        height: 180px
+        display: block
+
+.table-alert-rules
+  width: auto
+  margin: 0
+  td
+    border: 0
+    line-height: 20px
+    padding: 0
+  td.align-right
+    text-align: right
+  td.valign-center
+    vertical-align: middle
+  input, label
+    margin: 0
+
+#homepage-slide
+  height: 295px
+  margin-bottom: 0
+  background-image: url('/assets/img/front-bg.jpg')
+  background-repeat: no-repeat
+
+  div.item
+    height: 250px
+
+    h2
+      font-size: 30px
+      margin: 60px 0 20px 100px
+      text-shadow: 3px 3px 2px grey
+
+    p
+      margin-left: 100px
+      font-size: 18px
+      line-height: 30px
+
+#header_warn
+  width: 15px
+  height: 28px
+  margin: 12px 15px 0 0
+  background-image: url('/assets/img/warn-dot.png')
+  background-repeat: no-repeat
+  cursor: pointer
+
+#header_warn.ok
+  background-position: -2px -2px
+
+#header_warn.error
+  background-position: -22px -2px
+
+#header_warn_content
+  position: absolute
+  border: 1px solid gray
+  background-color: white
+  padding: 5px
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+
+ul.suite-category
+  width: 200px
+  padding-top: 5px
+  padding-bottom: 5px
+  float: left
+
+  i
+    width: 16px
+
+div.suite-charts
+  float: left
+  margin-left: 30px
+
+  div.suite-chart-item
+    width: 920px
+    margin-bottom: 30px
+
+    div.button-group
+      float: right
+      line-height: 30px
+      .btn
+        width: 60px
+
+
+// override bootstrap default style
+
+#header
+  .navbar
+    margin-bottom: 0

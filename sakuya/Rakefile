@@ -1,0 +1,60 @@
+# -*- mode: ruby; -*-
+
+# task :default => :update_assets
+require "rake"
+require "yaml"
+
+desc "run development server"
+task :serve do |t|
+  sh "venv/bin/python -m bottle --bind 0.0.0.0:9075 --debug --reload sakuya:app"
+end
+
+namespace :db do
+  desc "initiate database"
+  task :init do |t|
+    sh 'venv/bin/python -c "from sakuya.models import init_db; init_db()"'
+  end
+
+  task :reset do |t|
+    sh 'venv/bin/python -c "from sakuya.models import drop_db; drop_db()"'
+    sh 'venv/bin/python -c "from sakuya.models import init_db; init_db()"'
+  end
+
+  desc "run the db console"
+  task :console, :conn do |t, args|
+    conn = args['conn']
+    if conn.nil?
+      conn = 'sakuya_db'
+    end
+
+    env = ENV['BOTTLE_ENV']
+    if env.nil?
+      env = 'development'
+    end
+
+    yml = ''
+    open('sakuya/config/database.yml').each do |v|
+      yml += v
+    end
+
+    db_cfg = YAML.load(yml)[env][conn]
+
+    if db_cfg['adapter'] == 'mysql'
+      sh "mysql -h#{db_cfg['host']} -u#{db_cfg['username']} -p#{db_cfg['password']} -P#{db_cfg['port']} -A #{db_cfg['database']}"
+    end
+  end
+end
+
+namespace :sass do
+  desc "compile the sass to css"
+  task :compile do
+    cd "sakuya/assets"
+    sh "compass compile"
+  end
+
+  desc "compile the sass to css and keep watching"
+  task :watch do
+    cd "sakuya/assets"
+    sh "compass watch"
+  end
+end

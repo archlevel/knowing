@@ -1,0 +1,55 @@
+[
+
+{
+    "datasource": "access_log",
+    "logging": true,
+    "rule_type": "ninety",
+    "field": "upstream_response_time",
+    "filters": [
+        ["host", "endswith", false, ".haozu.com"],
+        ["host", "equals", true, "www.haozu.com"],
+        ["request_url", "regex", false, "/rental/broker/n/[0-9]+.*?"]
+    ]
+}
+,
+{
+    "datasource": "access_log",
+    "rule_type": "count",
+    "filters": [
+        ["host", "endswith", false, ".tower.com"],
+        ["upstream_response_time", "gt", false, 0.2],
+        ["upstream_response_time", "lte", false, 10]
+    ]
+}
+,
+{
+    "datasource": "access_log",
+    "rule_type": "unique",
+    "field": "remote_addr",
+    "filters": [
+        ["host", "in", false, ["shanghai.tower.com", "shanghai.aifang.com"]],
+        ["status", "nin", false, [301, 302, 8.8]],
+    ]
+}
+,
+{
+    "datasource": "soj",
+    "rule_type": "count",
+    "filters": [
+        ["site", "equals", false, "haozu"],
+        ["pn", "in", false, ["View_Landlord_IndexPage_Zheng",
+                             "View_Landlord_IndexPage_He",
+                             "View_Prop_YepPage_Zheng",
+                             "View_Prop_YepPage_He",
+                             "View_Prop_ViewBrokerPage_Zheng",
+                             "View_Prop_ViewBrokerPage_He",
+                             "View_Prop_CaptureBrokerPage_Zheng",
+                             "View_Prop_CaptureBrokerPage_He",
+                             "View_Landlord_CapturePage_Zheng",
+                             "View_Landlord_CapturePage_He",
+                             "View_Sublessor_ViewPage_Zheng",
+                             "View_Sublessor_ViewPage_He"]]
+    ]
+}
+
+]

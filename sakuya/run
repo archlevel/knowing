@@ -1,0 +1,41 @@
+#!/bin/bash
+
+if [ -z $1 ] || [ -z $2 ]
+then
+    echo "Usage: ./run <HEAD|sha1> <job.py> [arguments...]"
+    exit 1
+fi
+
+ROOT=/home/www/release/v2/sakuya
+
+if [ $1 = "HEAD" ]
+then
+    SHA1=`cat $ROOT/HEAD`
+else
+    SHA1=$1
+fi
+
+PREFIX=$ROOT/dist/sakuya-$SHA1
+PYTHON=$ROOT/venv/bin/python
+JOB=$PREFIX/jobs/$2
+
+if [ ! -f $JOB ]
+then
+    echo $JOB" not found"
+    exit 1
+fi
+
+args=""
+
+for arg in "$@"
+do
+    if [ $arg = $1 -o $arg = $2 ]
+    then
+        continue
+    fi
+    args=$args" "$arg
+done
+
+export BOTTLE_ENV="production"
+
+exec $PYTHON $JOB $args

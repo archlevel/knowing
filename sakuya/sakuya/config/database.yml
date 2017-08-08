@@ -1,0 +1,53 @@
+production:
+  sakuya_db:
+    adapter:  "mysql"
+    host:     "sakuya_db_ip"
+    port:     3306
+    username: "ops_monitor"
+    password: "ops_monitor"
+    database: "OPS_Monitor"
+    echo: false
+
+  ds:
+    adapter:  "mysql"
+    host:     "ds_ip"
+    port:     3306
+    username: "ops_monitor"
+    password: "ops_monitor"
+    database: "OPS_Monitor"
+
+  db_monitor:
+    adapter:  mysql
+    host:     db_monitor_ip
+    port:     3306
+    username: readonly_v2
+    password: aNjuKe9dx1Pdw
+    database: DB_Monitor
+    echo: false
+
+development:
+  sakuya_db:
+    adapter:  "mysql"
+    host:     "sakuya_db_ip"
+    port:     3306
+    username: "tower"
+    password: "tower123"
+    database: "OPS_Monitor"
+    echo: false
+
+  ds:
+    adapter:  "mysql"
+    host:     "ds_ip"
+    port:     3306
+    username: "ops_monitor"
+    password: "ops_monitor"
+    database: "OPS_Monitor"
+
+  db_monitor:
+    adapter:  mysql
+    host:     db_monitor_ip
+    port:     3306
+    username: tower
+    password: tower123
+    database: DB_Monitor
+    echo: false

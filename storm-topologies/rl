@@ -1,0 +1,1 @@
+storm jar target/storm-hello-1.0-fffffff-dev-jar-with-dependencies.jar com.anjuke.storm.hello.AccessLogTopology access_log

@@ -1,0 +1,9 @@
+.project
+.settings
+.classpath
+.buildpath
+classes
+target
+.pydevproject
+
+.virtualenv/

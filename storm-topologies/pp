@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+    echo "Usage: ./pp <job.py> [arguments...]"
+    exit 1
+fi
+
+args=""
+
+for arg in "$@"
+do
+    if [ $arg = $1 ];
+    then
+        continue
+    fi
+    args=$args" "$arg
+done
+
+puppy/.virtualenv/bin/python puppy/src/puppy/$1 $args

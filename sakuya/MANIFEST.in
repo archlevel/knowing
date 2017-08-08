@@ -1,0 +1,6 @@
+recursive-include sakuya/assets/css *
+recursive-include sakuya/assets/img *
+recursive-include sakuya/assets/js *
+
+recursive-include sakuya/config *
+recursive-include sakuya/views *

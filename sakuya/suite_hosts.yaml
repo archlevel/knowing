@@ -1,0 +1,22 @@
+---
+#"好租App":
+#  app10-003:
+#    ip: 10.10.3.4
+#    num_cores: 8
+#  app10-005:
+#    ip: 10.10.3.6
+#    num_cores: 8
+#  app10-006:
+#    ip: 10.10.3.7
+#    num_cores: 8
+#  idx10-001:
+#    ip: 10.10.6.30
+#    num_cores: 8
+
+"本地测试":
+  localhost:
+    ip: 127.0.0.1
+    num_cores: 2
+  192.168.1.96:
+    ip: 192.168.1.96
+    num_cores: 1

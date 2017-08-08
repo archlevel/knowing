@@ -1,0 +1,60 @@
+common: &common
+  cookie_secret: '\x08\xddo\x01\xd7\xd2uB\x9c\x90\x945\xa4\xd9"by\x8d\xc3\n_\xb9c\xc1'
+  roles:
+    admin: [tower]
+    sa: [tower]
+    haopan: [tower]
+
+turbomail: &turbomail
+  turbomail:
+    enable: True
+    manager: 'immediate'
+    transport: 'smtp'
+    server: 'mail_ip'
+    sender: 'Knowing <noreply@dm.tower.com>'
+
+development:
+  <<: *common
+  oauth:
+    url: https://auth.corp.tower.com
+    client: knowing_dev
+    secret: abc16542
+  zookeeper_hosts: 127.0.0.1:2181
+  hp_aggregate_connect: ipc:///tmp/hp_aggregate.ipc
+  hp_raw_data: /tmp/haopan-raw
+  hp_aggregate_bind: ipc:///tmp/hp_aggregate.ipc
+  hp_aggregate_connect: ipc:///tmp/hp_aggregate.ipc
+  hp_aggregate_charts: hp_aggregate_charts.bin
+  job_logs_directory: /tmp/logs
+  flocks_dir: /tmp
+  top_follows: /tmp/top_follows.bin
+  suite_hosts: suite_hosts.yaml
+  base_url: http://knowing.local.dev.tower.com
+  rule_logger_endpoint: ipc:///tmp/rule_logger.ipc
+  zeus_api_url: http://zeus.local.dev.tower.com/api
+  chart_ack_log: /tmp/chart_ack.log
+  <<: *turbomail
+  sos_receiver: "admin <mail_adress>"
+
+production:
+  <<: *common
+  oauth:
+    url: https://auth.corp.tower.com
+    client: knowing
+    secret: 0e1ef998
+  zookeeper_hosts: zk1:2181,zk2:2181,zk3:2181
+  hp_aggregate_connect: tcp://hp-ip:9076
+  hp_raw_data: /data1/sakuya/haopan-raw
+  hp_aggregate_bind: tcp://*:9076
+  hp_aggregate_connect: tcp://hp-ip:9076
+  hp_aggregate_charts: /data1/sakuya/hp_aggregate_charts.bin
+  job_logs_directory: /data1/sakuya/logs
+  flocks_dir: /data1/sakuya/flocks
+  top_follows: /data1/sakuya/top_follows.bin
+  suite_hosts: /data1/sakuya/suite_hosts.yaml
+  base_url: http://hp-ip:9075
+  rule_logger_endpoint: tcp://hp-ip:5418
+  zeus_api_url: http://zeus.a.ajkdns.com/api
+  chart_ack_log: /data1/sakuya/logs/chart_ack.log
+  <<: *turbomail
+  sos_receiver: "tower-admin@xxx.com"

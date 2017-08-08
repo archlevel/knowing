@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tower.storm</groupId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <name>storm-hello</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <my.rev>fffffff</my.rev>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>storm</groupId>
+            <artifactId>storm</artifactId>
+            <version>0.8.1</version>
+            <scope>${my.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack</artifactId>
+            <version>0.6.6</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.21</version>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>1.0.1</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.zookeeper</groupId>
+                    <artifactId>zookeeper</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.netflix.curator</groupId>
+                    <artifactId>curator-framework</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.10</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}-${project.version}-${my.rev}-${lane}</finalName>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        <archive>
+                            <manifest>
+                                <mainClass>com.tower.storm.hello.AccessLogTopology</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.10</version>
+                    <configuration>
+                        <useFile>false</useFile>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <lane>dev</lane>
+                <access_log.endpoint>ipc:///tmp/storm.ipc</access_log.endpoint>
+                <soj.endpoint>ipc:///tmp/soj.ipc</soj.endpoint>
+
+                <db.knowing.url>jdbc:mysql://192.168.1.103:3306/OPS_Monitor</db.knowing.url>
+                <db.knowing.user>caixh</db.knowing.user>
+                <db.knowing.password>caixh123</db.knowing.password>
+
+                <my.scope>compile</my.scope>
+                <zookeeper.hosts>127.0.0.1:2181</zookeeper.hosts>
+                <rule_logger.endpoint>ipc:///tmp/rule_logger.ipc</rule_logger.endpoint>
+                <unique_logger.endpoint>ipc:///tmp/unique_logger.ipc</unique_logger.endpoint>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <lane>prod</lane>
+                <access_log.endpoint>tcp://10.10.6.2:9983,tcp://10.10.6.3:9983,tcp://10.10.3.67:9998,tcp://10.10.3.66:9998,tcp://10.10.6.6:9981,tcp://10.10.6.6:9982,tcp://10.20.6.27:9981</access_log.endpoint>
+                <soj.endpoint>tcp://10.10.3.29:9998,tcp://10.10.3.102:9998</soj.endpoint>
+
+                <db.knowing.url>jdbc:mysql://10.10.8.35:3306/OPS_Monitor</db.knowing.url>
+                <db.knowing.user>ops_monitor</db.knowing.user>
+                <db.knowing.password>ops_monitor</db.knowing.password>
+
+                <my.scope>provided</my.scope>
+                <zookeeper.hosts>10.10.3.43:2181,10.10.3.9:2181,10.10.6.99:2181</zookeeper.hosts>
+                <rule_logger.endpoint>tcp://10.10.3.43:5418</rule_logger.endpoint>
+                <unique_logger.endpoint>tcp://10.10.3.43:5419</unique_logger.endpoint>
+            </properties>
+        </profile>
+    </profiles>
+
+    <artifactId>storm-topologies</artifactId>
+</project>
